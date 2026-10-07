@@ -53,7 +53,7 @@ req() {
   [ -n "$jar" ] && args+=(-b "$jar" -c "$jar")
   out=$(curl "${args[@]}" "$@" "$APP_URL$path" || echo "000 ")
   CODE=${out%% *}; LOCATION=${out#* }
-  BODY=$(cat "$TEST_TMP/body" 2>/dev/null || true)
+  BODY=$(tr -d '\000' <"$TEST_TMP/body" 2>/dev/null || true)
 }
 
 # login USERNAME PASSWORD JAR -> 0 when Wallos redirects to the app (form body from a private file, never argv).

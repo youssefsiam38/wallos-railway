@@ -8,7 +8,7 @@
 | Component | Reference |
 |-----------|-----------|
 | Wallos | `bellamy/wallos:5.8.3@sha256:0006879778f31a962a3873f7682514b92a3c7665dcbc4764fcc241ad968eaccd` |
-| Wrapper | `ghcr.io/youssefsiam38/wallos-railway:1.0.0@sha256:7d76a3f2876f58f183f5563415cc5a4838944c7774e3b75f1de06c17874778f1` |
+| Wrapper | `ghcr.io/youssefsiam38/wallos-railway:1.0.1@sha256:7fde5d33cd2bf0a90ce0393fa7fde85b70a114b24f9579d061c337fd84244352` |
 
 ## Refreshing a digest
 
