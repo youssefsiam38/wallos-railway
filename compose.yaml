@@ -1,0 +1,30 @@
+# Local test topology. Mirrors the Railway service graph: one service, one volume at /data.
+#   wallos -> Wallos (wrapper image: admin created from env over loopback, db + logos on /data), public on :80
+name: wallos-railway-test
+
+services:
+  wallos:
+    build:
+      context: .
+      dockerfile: images/wallos/Dockerfile
+      args:
+        WRAPPER_VERSION: ${WRAPPER_VERSION:-0.0.0-local}
+        VCS_REF: ${VCS_REF:-local}
+    image: ${WALLOS_RAILWAY_IMAGE:-wallos-railway:local}
+    restart: unless-stopped
+    environment:
+      # Test-only names on the host side, so a generic ADMIN_* in the caller's shell is never picked up.
+      ADMIN_USERNAME: ${WALLOS_TEST_ADMIN_USERNAME:-admin}
+      ADMIN_EMAIL: ${WALLOS_TEST_ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${WALLOS_TEST_ADMIN_PASSWORD:-local-test-only-admin-password}
+      ADMIN_CURRENCY: USD
+      ADMIN_LANGUAGE: en
+      PORT: '80'
+      TZ: UTC
+    ports:
+      - '127.0.0.1:${WALLOS_TEST_PORT:-18282}:80'
+    volumes:
+      - data:/data
+
+volumes:
+  data:
