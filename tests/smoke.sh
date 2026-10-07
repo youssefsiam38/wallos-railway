@@ -22,7 +22,7 @@ section "start-up"
 compose down -v --remove-orphans >/dev/null 2>&1 || true
 compose up -d >/dev/null 2>&1 || die "compose up failed"
 wait_for_app || { compose logs --tail 80 >&2; die "Wallos never became reachable"; }
-pass "health.php answers 200"
+pass "/healthz/ answers 200"
 logs=$(compose logs --no-color wallos 2>&1)
 assert_contains "the admin account was created before the port opened" "admin account created (email $WALLOS_ADMIN_EMAIL)" "$logs"
 assert_not_contains "the admin password never reaches the logs" "$WALLOS_ADMIN_PASSWORD" "$logs"

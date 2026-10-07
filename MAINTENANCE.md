@@ -26,3 +26,6 @@ skeleton sets volumes, domains and health checks.
 - Upstream `startup.sh` runs `crontab -d -u root`; jobs still run because dcron reads `/etc/cron.d/cronjobs`.
 - Login is by username, not email. `login.php` answers 302 to `.` on success and 200 (form again) on failure.
 - Writes need the session's CSRF token (`window.csrfToken` on any signed-in page) as `csrf_token`.
+- Railway rejects health-check paths containing a dot (`/health.php` → "Invalid input"). The wrapper adds
+  `/healthz/index.php` (includes upstream's `health.php`); the active nginx server block (in `nginx.conf`, not
+  `http.d/default.conf`, which is never included) has `index index.php`, so `/healthz/` answers 200.

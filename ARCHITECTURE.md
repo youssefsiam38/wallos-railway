@@ -17,7 +17,7 @@
                  Railway volume /data
 ```
 
-One service, one volume. Health check: `/health.php` (public, 200).
+One service, one volume. Health check: `/healthz/` (public, 200; an `index.php` that includes upstream's `health.php`, because Railway rejects health-check paths containing a dot).
 
 ## Why a wrapper
 

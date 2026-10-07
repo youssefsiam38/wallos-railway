@@ -6,6 +6,7 @@
 #     service; upstream needs two paths), via symlinks from the paths Wallos uses, and
 #   - creates the first (admin) account from ADMIN_* variables over loopback before the public port opens, so the
 #     open first-run registration page is never reachable from the internet.
+# Railway rejects health-check paths containing a dot, so /healthz/ (index.php -> upstream's health.php) is added.
 # It then execs upstream's own startup.sh (php-fpm + nginx + cron, migrations).
 #
 # Not affiliated with the Wallos project.
@@ -22,7 +23,9 @@ RUN set -eux; \
     mkdir -p /opt/wallos-railway/seed/logos/avatars; \
     rm -rf /var/www/html/images/uploads/logos; \
     ln -s /data/db /var/www/html/db; \
-    ln -s /data/logos /var/www/html/images/uploads/logos
+    ln -s /data/logos /var/www/html/images/uploads/logos; \
+    mkdir -p /var/www/html/healthz; \
+    printf '%s\n' '<?php' "require __DIR__ . '/../health.php';" > /var/www/html/healthz/index.php
 COPY --chmod=0755 images/wallos/railway-start.sh /opt/wallos-railway/railway-start.sh
 
 ENV BOOTSTRAP_PORT=8079 \

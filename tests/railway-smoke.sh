@@ -22,7 +22,7 @@ ADMIN=$TEST_TMP/admin.jar
 MODE=${1:-full}
 
 section "edge"
-assert_eq "HTTPS health check" "200" "$(http_code "$APP_URL/health.php")"
+assert_eq "HTTPS health check (/healthz/)" "200" "$(http_code "$APP_URL/healthz/")"
 assert_eq "HTTPS login page" "200" "$(http_code "$APP_URL/login.php")"
 case "$APP_URL" in
   https://*) assert_eq "plain HTTP is redirected to HTTPS" "301" "$(http_code "http://${APP_URL#https://}/")" ;;

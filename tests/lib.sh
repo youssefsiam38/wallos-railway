@@ -39,7 +39,7 @@ wait_for_code() {
   done
 }
 
-wait_for_app() { wait_for_code "$APP_URL/health.php" 200 "${1:-$TEST_TIMEOUT}"; }
+wait_for_app() { wait_for_code "$APP_URL/healthz/" 200 "${1:-$TEST_TIMEOUT}"; }
 
 compose() { docker compose -f "$REPO_ROOT/compose.yaml" "$@"; }
 

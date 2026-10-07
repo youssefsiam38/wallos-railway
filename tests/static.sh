@@ -40,6 +40,7 @@ assert_contains "upstream pinned by tag and digest" '^ARG WALLOS_IMAGE=bellamy/w
 assert_contains "the database path links to the volume" 'ln -s /data/db /var/www/html/db' "$(cat "$DF")"
 assert_contains "the logo path links to the volume" 'ln -s /data/logos /var/www/html/images/uploads/logos' "$(cat "$DF")"
 assert_contains "upstream's dumb-init entrypoint is kept (CMD only)" '^CMD \["/opt/wallos-railway/railway-start.sh"\]' "$(cat "$DF")"
+assert_contains "a dot-free health-check path exists (Railway rejects dots)" "/var/www/html/healthz/index.php" "$(cat "$DF")"
 assert_not_contains "no ENTRYPOINT override" 'ENTRYPOINT' "$(grep -v '^#' "$DF")"
 
 section "admin bootstrap"

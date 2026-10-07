@@ -47,7 +47,7 @@ database. `ADMIN_CURRENCY` (default `USD`) and `TZ` can be set before deploying.
 **What's configured for you:** the official Wallos image pinned by digest and used unmodified, plus a small start-up
 script; the admin account created on loopback before nginx starts (a fresh install without admin variables refuses
 to start instead of exposing the open registration page); the database and uploaded logos/avatars on one volume at
-`/data`; Wallos's cron jobs running in the container; a health check on `/health.php`.
+`/data`; Wallos's cron jobs running in the container; a health check on `/healthz/`.
 
 **Adding people:** Admin → Users, or turn on "Enable user registrations" in Admin while they sign up.
 
