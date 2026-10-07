@@ -28,7 +28,7 @@ Compared with a stock deploy:
 
 ## Deploy
 
-1. Open the template, click deploy and enter `ADMIN_EMAIL` (your email). Optionally change `ADMIN_USERNAME`
+1. Open https://railway.com/deploy/wallos-subscription-manager, click deploy and enter `ADMIN_EMAIL` (your email). Optionally change `ADMIN_USERNAME`
    (default `admin`), `ADMIN_CURRENCY` (default `USD`) and `TZ`.
 2. Wait for the service to turn green (about a minute).
 3. Open the `wallos` service → Variables → copy `ADMIN_PASSWORD`.
